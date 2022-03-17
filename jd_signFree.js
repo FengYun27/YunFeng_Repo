@@ -1,6 +1,6 @@
 /**
  * JD极速_签到免单
- * cron "0 0 0 * * ?" jd_signFree.js,tag=JD极速_签到免单
+ * cron "0 0 1 * * ?" jd_signFree.js,tag=JD极速_签到免单
  */
 const $ = new Env('JD极速_签到免单');
 const notify = $.isNode() ? require('./sendNotify') : '';
