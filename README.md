@@ -63,7 +63,7 @@ ql repo http://gitlab.kuade.vip:9000/houchengwei/jd_repo.git "jd_" "expire" "ql|
 
 ## Stars 趋势
 
-<a href="https://github.com/FengYun27/YunFeng_Repo/stargazers" target="_blank"><img src="https://cdn.jsdelivr.net/gh/FengYun27/YunFeng_Repo@main/images/starcharts.svg" alt="Stargazers over time" /></a>
+[![FengYun27's github starts](https://github-readme-stats.vercel.app/api?username=FengYun27&theme=great-gatsby)](https://github.com/FengYun27/FengYun27)
 
 ## 呜谢
 
