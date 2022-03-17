@@ -42,6 +42,19 @@ ql repo http://gitlab.kuade.vip:9000/houchengwei/jd_repo.git "jd_" "expire" "ql|
 - 京喜牧场 jd_jxmc.js
 - 伊利养牛记 jd_ylyn.js
 
+## 依赖
+### NodeJs
+- axios
+- ts-md5
+- jsdom
+- png-js
+- moment
+### Python
+- PyExecJS
+- json5
+- requests
+- pycryptodomex
+
 # Special statement
 
 * Any unlocking and decryption analysis scripts involved in the Script project released by this warehouse are only used for testing, learning and research, and are forbidden to be used for commercial purposes. Their legality, accuracy, completeness and effectiveness cannot be guaranteed. Please make your own judgment based on the situation. .
