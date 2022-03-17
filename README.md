@@ -2,13 +2,24 @@
 ## 收集整理全网可用脚本 进行分类整理 去除内置助力码 对加密脚本进行标注
 **拉库命令**
 
+国外
+
 ```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS"
+ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
+
+25 1-23/4 * * *
+```
+
+国内
+
+```shell
+ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
 
 25 1-23/4 * * *
 ```
 
 ## 脚本列表
+
 ### 可以运行 有用性未知
 - 汪汪乐园养joy jd_joy_park_mod.js
 - 超级直播间红包雨 jd_live_redrain.js
