@@ -10,7 +10,7 @@ helpnum 助力前面ck数量,建议1-3,换景变量支持 HELP_NUM
 const $ = new Env('京东全民开红包助力-纯助力');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 let isLoginInfo = {}

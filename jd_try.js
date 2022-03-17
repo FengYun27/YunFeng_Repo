@@ -294,7 +294,7 @@ function requireConfig () {
         $.cookiesArr = []
         if ($.isNode()) {
             //Node.js用户请在jdCookie.js处填写京东ck;
-            const jdCookieNode = require('./jdCookie.js');
+            const jdCookieNode = require('./jdcookie.js');
             Object.keys(jdCookieNode).forEach((item) => {
                 if (jdCookieNode[item]) $.cookiesArr.push(jdCookieNode[item])
             })

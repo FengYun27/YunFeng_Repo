@@ -6,7 +6,7 @@
  */
 const $ = new Env('特务Z');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
 let cookiesArr = [];
 let UA = ``;
 $.allInvite = [];

@@ -3,7 +3,7 @@
 0 8 * * * jd_wyw.js, tag=玩一玩成就
 */
 const $ = new Env('玩一玩成就');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie

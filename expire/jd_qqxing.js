@@ -10,7 +10,7 @@
 */
 const $ = new Env('QQ星系牧场');
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}
@@ -153,7 +153,7 @@ function updateCookie (resp) {
     for (let key in newObj) {
         key && (cookie = cookie + `${key}=${newObj[key]};`)
     }
-    // console.log(cookie, 'jdCookie')
+    // console.log(cookie, 'jdcookie')
 }
 function jdUrl (functionId, body) {
     return {
