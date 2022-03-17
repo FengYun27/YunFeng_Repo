@@ -3,7 +3,7 @@
 **拉库命令**
 
 ```shell
-ql repo http://gitlab.kuade.vip:9000/houchengwei/jd_repo.git "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS"
+ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS"
 
 25 1-23/4 * * *
 ```
