@@ -8,7 +8,7 @@
  * 互助码shareCode请先手动运行脚本查看打印可看到
  * 每个京东账号每天只能帮助3个人。多出的助力码将会助力失败。
  */
-const $ = new Env('京东种豆得豆_内部互助');
+const $ = new Env('种豆得豆互助版');
 //Node.js用户请在jdCookie.js处填写京东ck;
 //ios等软件用户直接用NobyDa的jd cookie
 let jdNotify = true;//是否开启静默运行。默认true开启
@@ -27,6 +27,20 @@ let awardState = '';//上期活动的京豆是否收取
 let randomCount = $.isNode() ? 20 : 5;
 let num;
 $.newShareCode = [];
+
+let NowHour = new Date().getHours();
+let llhelp = true;
+if ($.isNode() && process.env.CC_NOHELPAFTER8) {
+    console.log(NowHour);
+    if (process.env.CC_NOHELPAFTER8 == "true") {
+        if (NowHour > 8) {
+            llhelp = false;
+            console.log(`现在是9点后时段，不启用互助....`);
+        }
+    }
+}
+
+
 !(async () => {
     await requireConfig();
     if (!cookiesArr[0]) {
@@ -57,13 +71,15 @@ $.newShareCode = [];
             await showMsg();
         }
     }
-    for (let j = 0; j < cookiesArr.length; j++) {
-        if (cookiesArr[j]) {
-            cookie = cookiesArr[j];
-            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-            $.index = j + 1;
-            //await shareCodesFormat();
-            await doHelp()
+    if (llhelp) {
+        for (let j = 0; j < cookiesArr.length; j++) {
+            if (cookiesArr[j]) {
+                cookie = cookiesArr[j];
+                $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+                $.index = j + 1;
+                //await shareCodesFormat();
+                await doHelp()
+            }
         }
     }
     if ($.isNode() && allMessage) {
@@ -254,16 +270,21 @@ async function doTask () {
                 const { data } = $.shopTaskListRes;
                 let goodShopListARR = [], moreShopListARR = [], shopList = [];
                 const { goodShopList, moreShopList } = data;
-                for (let i of goodShopList) {
-                    if (i.taskState === '2') {
-                        goodShopListARR.push(i);
+                if (goodShopList) {
+                    for (let i of goodShopList) {
+                        if (i.taskState === '2') {
+                            goodShopListARR.push(i);
+                        }
                     }
                 }
-                for (let j of moreShopList) {
-                    if (j.taskState === '2') {
-                        moreShopListARR.push(j);
+                if (moreShopList) {
+                    for (let j of moreShopList) {
+                        if (j.taskState === '2') {
+                            moreShopListARR.push(j);
+                        }
                     }
                 }
+
                 shopList = goodShopListARR.concat(moreShopListARR);
                 for (let shop of shopList) {
                     const { shopId, shopTaskId } = shop;
@@ -533,29 +554,6 @@ async function helpShare (plantUuid) {
 }
 async function plantBeanIndex () {
     $.plantBeanIndexResult = await request('plantBeanIndex');//plantBeanIndexBody
-}
-function readShareCode () {
-    return new Promise(async resolve => {
-        $.get({ url: `https://api.jdsharecode.xyz/api/bean/${randomCount}`, timeout: 10000 }, (err, resp, data) => {
-            try {
-                if (err) {
-                    console.log(`${JSON.stringify(err)}`)
-                    console.log(`${$.name} API请求失败，请检查网路重试`)
-                } else {
-                    if (data) {
-                        console.log(`随机取${randomCount}个码放到您固定的互助码后面(不影响已有固定互助)`)
-                        data = JSON.parse(data);
-                    }
-                }
-            } catch (e) {
-                $.logErr(e, resp)
-            } finally {
-                resolve(data);
-            }
-        })
-        await $.wait(15000);
-        resolve()
-    })
 }
 //格式化助力码
 function shareCodesFormat () {
