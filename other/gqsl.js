@@ -107,7 +107,7 @@ function Sign_In () {
                 if (results.code == 0000) {
                     console.log(`【签到状态】:${results.data.isSignIn == true ? '签到成功' : '未签到'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -132,7 +132,7 @@ function Share_4 () {
                 if (results.code == 0000) {
                     console.log(`【分享状态】:${results.success == true ? '分享成功' : '分享失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -157,7 +157,7 @@ function Share_5 () {
                 if (results.code == 0000) {
                     console.log(`【分享状态】:${results.success == true ? '分享成功' : '分享失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -182,7 +182,7 @@ function Share_6 () {
                 if (results.code == 0000) {
                     console.log(`【分享状态】:${results.success == true ? '分享成功' : '分享失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -207,7 +207,7 @@ function Add_Comment () {
                 if (results.code == 0000) {
                     console.log(`【评论状态】:${results.success == true ? '评论成功' : '评论失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -232,7 +232,7 @@ function Add_Answer () {
                 if (results.code == 0000) {
                     console.log(`【问题状态】:${results.success == true ? '回答成功' : '回答失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -257,7 +257,7 @@ function Add_Dynamic () {
                 if (results.code == '0000') {
                     console.log(`【发布状态】:${results.success == true ? '发布成功' : '发布失败'}`)
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -280,7 +280,7 @@ function Update_Info () {
         $.post(body, async (err, resp, data) => {
             try {
             } catch (e) {
-                $.logErr(e, resp);
+                $.log(data)
             } finally {
                 resolve()
             }
@@ -302,6 +302,8 @@ async function Remove_Dynamic () {
                 try {
                     if (results.code == '0000') {
                         $.log(`【动态(${IdArr[i]})】:删除成功`);
+                    } else {
+                        $.log(results.msg)
                     }
                 } catch (e) {
                     $.logErr(e, resp);
@@ -332,6 +334,8 @@ function Query_Dynamic () {
                     }
                     $.log(`共有${IdArr.length}条动态`);
                     resolve(IdArr);
+                } else {
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -366,6 +370,8 @@ function Query_UserInfo (authorization) {
                     msg += `
 用户昵称:${results.data.nickname}
 手机号:${results.data.mobile}`
+                } else {
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
