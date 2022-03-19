@@ -45,10 +45,11 @@ msg = '';
             'Authorization': `${slCookiesArr[i]}`,
             'Content-Type': 'application/json;charset=utf-8'
         }
-        $.log(`\n========= 开始【第 ${i + 1} 个账号】=========`)
-        msg += `【第 ${i + 1} 个账号】`
+        let ii = i + 1;
+        $.log(`\n========= 开始【第 ${ii} 个账号】=========`)
+        msg += `【第 ${ii} 个账号】\n`
 
-        await Update_Info();
+        //await Update_Info();
         await $.wait(1 * 1000);
 
         await Query_UserInfo(slCookiesArr[i]);
@@ -293,24 +294,26 @@ function Update_Info () {
  */
 async function Remove_Dynamic () {
     let IdArr = await Query_Dynamic();
-    if (IdArr.length > 0) {
-        $.log(`开始 【删除动态】`);
-        for (i = 0; i < IdArr.length; i++) {
-            body.url = 'https://mspace.gmmc.com.cn/social-cms-app/frontend/dynamic/delete'
-            body.body = `{"dynamicId": ${IdArr[i]}}`
-            await $.post(body, async (err, resp, data) => {
-                try {
-                    if (results.code == '0000') {
-                        $.log(`【动态(${IdArr[i]})】:删除成功`);
-                    } else {
-                        $.log(results.msg)
+    if (IdArr) {
+        if (IdArr.length > 0) {
+            $.log(`开始 【删除动态】`);
+            for (i = 0; i < IdArr.length; i++) {
+                body.url = 'https://mspace.gmmc.com.cn/social-cms-app/frontend/dynamic/delete'
+                body.body = `{"dynamicId": ${IdArr[i]}}`
+                await $.post(body, async (err, resp, data) => {
+                    try {
+                        if (results.code == '0000') {
+                            $.log(`【动态(${IdArr[i]})】:删除成功`);
+                        } else {
+                            $.log(results.msg)
+                        }
+                    } catch (e) {
+                        $.logErr(e, resp);
+                    } finally {
                     }
-                } catch (e) {
-                    $.logErr(e, resp);
-                } finally {
-                }
-            })
-            await $.wait(1 * 1000);
+                })
+                await $.wait(1 * 1000);
+            }
         }
     }
 }
@@ -372,6 +375,7 @@ function Query_UserInfo (authorization) {
 手机号:${results.data.mobile}`
                 } else {
                     $.log(results.msg)
+                    msg += '账号已过期\n'
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -401,7 +405,7 @@ function Query_Balance (frist) {
                         console.log(`【任务后总积分】:${results.data}\n`)
                     }
                 } else {
-                    $.logErr(resp)
+                    $.log(results.msg)
                 }
             } catch (e) {
                 $.logErr(e, resp);
