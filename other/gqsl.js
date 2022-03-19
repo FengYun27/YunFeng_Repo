@@ -38,21 +38,23 @@ msg = '';
         }
     }
     $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
+    $.log(slCookiesArr)
     await $.wait(1 * 1000);
 
-    for (i = 0; i < slCookiesArr.length; i++) {
+    for (let index = 0; index < slCookiesArr.length; index++) {
+        let cookie = slCookiesArr[index]
         body.headers = {
-            'Authorization': `${slCookiesArr[i]}`,
+            'Authorization': `${cookie}`,
             'Content-Type': 'application/json;charset=utf-8'
         }
-        let ii = i + 1;
-        $.log(`\n========= 开始【第 ${ii} 个账号】=========`)
-        msg += `【第 ${ii} 个账号】\n`
-
-        //await Update_Info();
         await $.wait(1 * 1000);
+        var num = index + 1
+        $.log(`\n========= 开始【第 ${num} 个账号】=========`)
+        msg += `【第 ${num} 个账号】\n`
+        $.log(cookie)
+        //await Update_Info();
 
-        await Query_UserInfo(slCookiesArr[i]);
+        await Query_UserInfo(slCookiesArr[index]);
         await Query_Balance(true);
         await $.wait(1 * 1000);
 
@@ -85,7 +87,6 @@ msg = '';
         await $.wait(2 * 1000);
         await Remove_Dynamic()
 
-        $.log('开始 查询积分')
         await $.wait(10 * 1000);
         await Query_Balance();
     }
