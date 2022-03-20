@@ -130,7 +130,7 @@ let userWxShareCodeArr = {
 
 //APP任务
 let appActidArray = {
-    "daily": [1101, 1103, 1104, 1105, 1109, 1111, 1112, 1113],
+    "daily": [1101, 1105, 1111, 1112, 1113],
     "newbie": [1023, 1033,],
 }
 let appTaskArray = {
@@ -355,7 +355,10 @@ async function checkEnv () {
 
     totalUser = appUrlArr.length
     shareFlag = (help && totalUser > 1)
-    $.log(`共找到${totalUser}个用户\n`)
+    $.log(`========共找到${totalUser}个用户========`)
+    $.log(`TxStockAppUrl 有${appUrlArrs.length}个`)
+    $.log(`TxStockAppHeader 有${appHeaderArrs.length}个`)
+    $.log(`TxStockWxHeader 有${wxHeaderArr.length}个\n`)
 
     return true
 }
@@ -382,13 +385,14 @@ async function getEnvParam (userNum) {
             cookie = appHeaderArrVal[item]
             //pgv_info_ssid = cookie.match(/pgv_info=ssid=([\w]+)/)[1]
             pgv_pvid = cookie.match(/pgv_pvid=([\w]+)/)[1]
-            ts_sid = cookie.match(/ts_sid=([\w]+)/)[1]
-            ts_uid = cookie.match(/ts_uid=([\w]+)/)[1]
+            //ts_sid = cookie.match(/ts_sid=([\w]+)/)[1]
+            //ts_uid = cookie.match(/ts_uid=([\w]+)/)[1]
         } else if (item.toLowerCase() == "user-agent") {
             app_UA = appHeaderArrVal[item]
         }
     })
-    app_ck = `pgv_pvid=${pgv_pvid}; ts_sid=${ts_sid}; ts_uid=${ts_uid}`
+    //app_ck = `pgv_pvid=${pgv_pvid}; ts_sid=${ts_sid}; ts_uid=${ts_uid}`
+    app_ck = `pgv_pvid=${pgv_pvid};`
 
     wx_ck_tmp = ""
     wx_UA = ""
