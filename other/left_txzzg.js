@@ -48,7 +48,7 @@ hostname = wzq.tenpay.com
 */
 
 const jsname = '腾讯自选股'
-const $ = Env(jsname)
+const $ = new Env(jsname)
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -364,64 +364,70 @@ async function checkEnv () {
 }
 
 async function getEnvParam (userNum) {
-    appUrlArrVal = appUrlArr[userNum];
-    appHeaderArrVal = JSON.parse(appHeaderArr[userNum]);
-    wxHeaderArrVal = JSON.parse(wxHeaderArr[userNum]);
+    try {
+        appUrlArrVal = appUrlArr[userNum];
+        appHeaderArrVal = JSON.parse(appHeaderArr[userNum]);
+        wxHeaderArrVal = JSON.parse(wxHeaderArr[userNum]);
 
-    app_openid = appUrlArrVal.match(/&openid=([\w-]+)/)[1]
-    app_fskey = appUrlArrVal.match(/&fskey=([\w-]+)/)[1]
-    //app_token = appUrlArrVal.match(/&access_token=([\w-]+)/)[1]
-    app_token = ""
-    app_appName = appUrlArrVal.match(/&_appName=([\w\.,-]+)/)[1]
-    app_appver = appUrlArrVal.match(/&_appver=([\w\.,-]+)/)[1]
-    app_osVer = appUrlArrVal.match(/&_osVer=([\w\.,-]+)/)[1]
-    app_devId = appUrlArrVal.match(/&_devId=([\w-]+)/)[1]
+        app_openid = appUrlArrVal.match(/&openid=([\w-]+)/)[1]
+        app_fskey = appUrlArrVal.match(/&fskey=([\w-]+)/)[1]
+        //app_token = appUrlArrVal.match(/&access_token=([\w-]+)/)[1]
+        app_token = ""
+        app_appName = appUrlArrVal.match(/&_appName=([\w\.,-]+)/)[1]
+        app_appver = appUrlArrVal.match(/&_appver=([\w\.,-]+)/)[1]
+        app_osVer = appUrlArrVal.match(/&_osVer=([\w\.,-]+)/)[1]
+        app_devId = appUrlArrVal.match(/&_devId=([\w-]+)/)[1]
 
-    app_ck = ""
-    app_UA = ""
-    Object.keys(appHeaderArrVal).forEach((item) => {
-        if (item.toLowerCase() == "cookie") {
-            //app_ck = appHeaderArrVal[item]
-            cookie = appHeaderArrVal[item]
-            //pgv_info_ssid = cookie.match(/pgv_info=ssid=([\w]+)/)[1]
-            pgv_pvid = cookie.match(/pgv_pvid=([\w]+)/)[1]
-            //ts_sid = cookie.match(/ts_sid=([\w]+)/)[1]
-            //ts_uid = cookie.match(/ts_uid=([\w]+)/)[1]
-        } else if (item.toLowerCase() == "user-agent") {
-            app_UA = appHeaderArrVal[item]
-        }
-    })
-    //app_ck = `pgv_pvid=${pgv_pvid}; ts_sid=${ts_sid}; ts_uid=${ts_uid}`
-    app_ck = `pgv_pvid=${pgv_pvid};`
+        app_ck = ""
+        app_UA = ""
+        Object.keys(appHeaderArrVal).forEach((item) => {
+            if (item.toLowerCase() == "cookie") {
+                //app_ck = appHeaderArrVal[item]
+                cookie = appHeaderArrVal[item]
+                //pgv_info_ssid = cookie.match(/pgv_info=ssid=([\w]+)/)[1]
+                pgv_pvid = cookie.match(/pgv_pvid=([\w]+)/)[1]
+                //ts_sid = cookie.match(/ts_sid=([\w]+)/)[1]
+                //ts_uid = cookie.match(/ts_uid=([\w]+)/)[1]
+            } else if (item.toLowerCase() == "user-agent") {
+                app_UA = appHeaderArrVal[item]
+            }
+        })
+        //app_ck = `pgv_pvid=${pgv_pvid}; ts_sid=${ts_sid}; ts_uid=${ts_uid}`
+        app_ck = `pgv_pvid=${pgv_pvid};`
 
-    wx_ck_tmp = ""
-    wx_UA = ""
-    Object.keys(wxHeaderArrVal).forEach((item) => {
-        if (item.toLowerCase() == "cookie") {
-            wx_ck_tmp = wxHeaderArrVal[item]
-        } else if (item.toLowerCase() == "user-agent") {
-            wx_UA = wxHeaderArrVal[item]
-        }
-    })
+        wx_ck_tmp = ""
+        wx_UA = ""
+        Object.keys(wxHeaderArrVal).forEach((item) => {
+            if (item.toLowerCase() == "cookie") {
+                wx_ck_tmp = wxHeaderArrVal[item]
+            } else if (item.toLowerCase() == "user-agent") {
+                wx_UA = wxHeaderArrVal[item]
+            }
+        })
 
-    pgv_info = wx_ck_tmp.match(/pgv_info=([\w=]+)/)[1]
-    pgv_pvid = wx_ck_tmp.match(/pgv_pvid=([\w]+)/)[1]
-    //ts_last = wx_ck_tmp.match(/ts_last=([\w\/]+)/)[1]
-    //ts_refer = wx_ck_tmp.match(/ts_refer=([\w\/\.]+)/)[1]
-    //ts_sid = wx_ck_tmp.match(/ts_sid=([\w]+)/)[1]
-    //ts_uid = wx_ck_tmp.match(/ts_uid=([\w]+)/)[1]
-    qlappid = wx_ck_tmp.match(/qlappid=([\w]+)/)[1]
-    qlskey = wx_ck_tmp.match(/qlskey=([\w]+)/)[1]
-    qluin = wx_ck_tmp.match(/qluin=([\w@\.]+)/)[1]
-    //qq_logtype = wx_ck_tmp.match(/qq_logtype=([\w]+)/)[1]
-    wzq_qlappid = wx_ck_tmp.match(/wzq_qlappid=([\w]+)/)[1]
-    wzq_qlskey = wx_ck_tmp.match(/wzq_qlskey=([\w]+)/)[1]
-    wzq_qluin = wx_ck_tmp.match(/wzq_qluin=([\w-]+)/)[1]
-    zxg_openid = wx_ck_tmp.match(/zxg_openid=([\w-]+)/)[1]
+        pgv_info = wx_ck_tmp.match(/pgv_info=([\w=]+)/)[1]
+        pgv_pvid = wx_ck_tmp.match(/pgv_pvid=([\w]+)/)[1]
+        //ts_last = wx_ck_tmp.match(/ts_last=([\w\/]+)/)[1]
+        //ts_refer = wx_ck_tmp.match(/ts_refer=([\w\/\.]+)/)[1]
+        //ts_sid = wx_ck_tmp.match(/ts_sid=([\w]+)/)[1]
+        //ts_uid = wx_ck_tmp.match(/ts_uid=([\w]+)/)[1]
+        qlappid = wx_ck_tmp.match(/qlappid=([\w]+)/)[1]
+        qlskey = wx_ck_tmp.match(/qlskey=([\w]+)/)[1]
+        qluin = wx_ck_tmp.match(/qluin=([\w@\.]+)/)[1]
+        //qq_logtype = wx_ck_tmp.match(/qq_logtype=([\w]+)/)[1]
+        wzq_qlappid = wx_ck_tmp.match(/wzq_qlappid=([\w]+)/)[1]
+        wzq_qlskey = wx_ck_tmp.match(/wzq_qlskey=([\w]+)/)[1]
+        wzq_qluin = wx_ck_tmp.match(/wzq_qluin=([\w-]+)/)[1]
+        zxg_openid = wx_ck_tmp.match(/zxg_openid=([\w-]+)/)[1]
 
-    //wx_ck = `pgv_info=${pgv_info}; pgv_pvid=${pgv_pvid}; ts_last=${ts_last}; ts_refer=${ts_refer}; ts_sid=${ts_sid}; ts_uid=${ts_uid}; qlappid=${qlappid}; qlskey=${qlskey}; qluin=${qluin}; qq_logtype=${qq_logtype}; wx_session_time=${sessionTime}; wzq_qlappid=${wzq_qlappid}; wzq_qlskey=${wzq_qlskey}; wzq_qluin=${wzq_qluin}; zxg_openid=${zxg_openid}`
+        //wx_ck = `pgv_info=${pgv_info}; pgv_pvid=${pgv_pvid}; ts_last=${ts_last}; ts_refer=${ts_refer}; ts_sid=${ts_sid}; ts_uid=${ts_uid}; qlappid=${qlappid}; qlskey=${qlskey}; qluin=${qluin}; qq_logtype=${qq_logtype}; wx_session_time=${sessionTime}; wzq_qlappid=${wzq_qlappid}; wzq_qlskey=${wzq_qlskey}; wzq_qluin=${wzq_qluin}; zxg_openid=${zxg_openid}`
 
-    wx_ck = `pgv_info=${pgv_info}; pgv_pvid=${pgv_pvid}; qlappid=${qlappid}; qlskey=${qlskey}; qluin=${qluin}; wzq_qlappid=${wzq_qlappid}; wzq_qlskey=${wzq_qlskey}; wzq_qluin=${wzq_qluin}; zxg_openid=${zxg_openid}`
+        wx_ck = `pgv_info=${pgv_info}; pgv_pvid=${pgv_pvid}; qlappid=${qlappid}; qlskey=${qlskey}; qluin=${qluin}; wzq_qlappid=${wzq_qlappid}; wzq_qlskey=${wzq_qlskey}; wzq_qluin=${wzq_qluin}; zxg_openid=${zxg_openid}`
+    }
+    catch (err) {
+        $.log(`获取env 字段错误：` + err)
+    }
+
 }
 
 async function initAccountInfo () {
