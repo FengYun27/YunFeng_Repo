@@ -18,22 +18,36 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 25 1-23/4 * * *
 ```
 
-## 脚本列表
+**单拉羊毛脚本**
+
+国外
+
+```shell
+ql raw https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/<脚本名称>.js
+```
+
+国内
+
+```shell
+ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/<脚本名称>.js
+```
+
+# 脚本列表
+
+## JD脚本
 
 ### 可以运行 有用性未知
 - 汪汪乐园养joy jd_joy_park_mod.js
 - 超级直播间红包雨 jd_live_redrain.js
 - 京东摇钱树 jd_moneyTree.js
 - 京东摇钱树助力 jd_moneyTree_heip
-- 头文字J 游戏 jd_mpdzcar_game.js
-- 头文字J 助力 jd_mpdzcar_help.js
-- 头文字J jd_mpdzcar.js
 - 牛牛福利 jd_nnfls.js
 - 整点京豆雨 jd_redrain.js
 - 半点京豆雨 jd_half_redrain.js
 
 ### 加密脚本 安全未知
-- 京喜领88元红包 jd_jxlhb.js
+
+- 
 
 ### 自带助力池的脚本
 - 京喜牧场 jd_jxmc.js
@@ -47,11 +61,27 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 ### 过期脚本及活动
 - 送豆得豆 jd_sendBeans.js
 - 注销京东会员卡 jd_unbind.js
+- 京喜领88元红包 jd_jxlhb.js
+- 头文字J 游戏 jd_mpdzcar_game.js
+- 头文字J 助力 jd_mpdzcar_help.js
+- 头文字J jd_mpdzcar.js
+- 超级盒子 jd_cjhz.js
 
 ### 需要添加环境变量及需要手动开启
 - 店铺签到 jd_shop_sign.js
 - 京喜牧场 jd_jxmc.js
 - 伊利养牛记 jd_ylyn.js
+- 京东试用 jd_try.js
+
+## 羊毛
+
+- 广汽三菱 gqsl.js
+
+- 滴滴果园 left_ddgy.js
+- 滴滴果园刷水滴 tom_ddgyssd.js
+- 快手普通版 left_ks.js
+- 快手极速版 left_ksjsb.js
+- 腾讯自选股 left_txzzg.js
 
 ## 依赖
 ### NodeJs
@@ -85,10 +115,6 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
  **You must completely delete the above content from your computer or mobile phone within 24 hours after downloading.**  </br>
 > ***You have used or copied any script made by yourself in this warehouse, it is deemed to have accepted this statement, please read it carefully*** 
 
-## Stars 趋势
-
-[![FengYun27's github starts](https://github-readme-stats.vercel.app/api?username=FengYun27&theme=great-gatsby)](https://github.com/FengYun27/FengYun27)
-
 ## 呜谢
 
 以下排名不分先后
@@ -96,4 +122,4 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 - [Orz-3](https://github.com/Orz-3)
 - [shufflewzc](https://github.com/shufflewzc)
 - [whyour](https://github.com/whyour)
-....
+- ....
