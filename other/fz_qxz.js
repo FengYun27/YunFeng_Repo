@@ -4,7 +4,8 @@
 新人进去直接秒到账两个0.3.。。。（微信登录）花两分钟再完成下新人任务，大概秒到微信3元左右
 感觉看账号等级，我的小号进去只能做五个任务，大号可以做十个。
 建议做一下里面的任务，单价还是不错的，做完等级升上来了挂脚本收益也多一点。
-抓取域名  wap.quxianzhuan.com  抓取cookie的全部数据。。
+抓取域名  wap.quxianzhuan.com  
+格式：tzb_formhash_cookie=xxxx; CNZZDATA1275822095=xxxx-xxxx-xxxx; tzb_session=xxxx; tzb_user_cryptograph=xxxxxxxxxxxxxxxxxxxxxxxx; 
 青龙变量  xqzck  多账户@隔开
 运行cron  一天一次，自己设置。。别同时跑
 示例： "10 12 * * *"
