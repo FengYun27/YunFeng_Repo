@@ -1,13 +1,12 @@
 # YunFeng_Repo
 ## 收集整理全网可用脚本 进行分类整理 去除内置助力码 对加密脚本进行标注
-**拉库命令**
 
+### JD仓库 拉库命令
 国外
-
 ```shell
 ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
 
-25 1-23/4 * * *
+30 0/15 * * * ? 
 ```
 
 国内
@@ -15,10 +14,23 @@ ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|
 ```shell
 ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
 
-25 1-23/4 * * *
+30 0/15 * * * ? 
 ```
+### 羊毛仓库 拉库命令
+国内
+```shell
+ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "other" "expire|jd_" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
 
-**单拉羊毛脚本**
+30 0/15 * * * ? 
+```
+国外
+```shell
+ql repo https://github.com/FengYun27/YunFeng_Repo.git "other" "expire|jd_" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
+
+30 0/15 * * * ? 
+```
+#### 单拉羊毛脚本
+- [羊毛脚本列表](#羊毛)
 
 国外
 
@@ -48,6 +60,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 ### 加密脚本 安全未知
 - 赚京豆 jd_syj.js
 - 京东极速版_金币 jd_speed_signfaker.js
+- 京东到家果园 jd_dj_fruit.js
 
 ### 自带助力池的脚本
 - 京喜牧场 jd_jxmc.js
@@ -75,14 +88,15 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 - 京东试用 jd_try.js
 
 ## 羊毛
-
 - 广汽三菱 gqsl.js
 - 滴滴果园 left_ddgy.js
 - 滴滴果园刷水滴 tom_ddgyssd.js
 - 快手普通版 left_ks.js
 - 快手极速版 left_ksjsb.js
 - 腾讯自选股v2 left_txzzg.js
-- 腾讯自选股v1 left_txzxgv1.js
+
+### 临时羊毛活动
+- 顺丰——乘风寻宝记 fz_sfxbj.js
 
 ## 依赖
 ### NodeJs
