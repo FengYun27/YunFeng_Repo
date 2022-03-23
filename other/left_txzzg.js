@@ -27,7 +27,7 @@ https://wzq.tenpay.com/cgi-bin/.*user.*.fcgi url script-request-header https://r
 hostname = wzq.tenpay.com
 */
 const jsname = '腾讯自选股V2'
-const $ = new Env(jsname);
+const $ = new Env('腾讯自选股v2');
 
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1
 let notifyStr = ''

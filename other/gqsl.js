@@ -61,7 +61,9 @@ const QA_Arr = ['是', '没错', '百度可以找得到', '专业人士来解答
                 $.log(cookie)
                 //await Update_Info();
 
-                await Query_UserInfo(slCookiesArr[index]);
+                var status = await Query_UserInfo(slCookiesArr[index]);
+                if (!status) continue;
+
                 await Query_Balance(true);
                 await $.wait(1 * 1000);
 
@@ -654,9 +656,11 @@ async function Query_UserInfo (authorization) {
 【手机号】 ${results.data.mobile}`
 
                     UserId = results.data.code
+                    resolve(true)
                 } else {
                     $.log(results.msg)
                     SendMsg(`${authorization}该CK已过期`)
+                    resolve(false)
                 }
             } catch (e) {
                 $.logErr(e, resp);
