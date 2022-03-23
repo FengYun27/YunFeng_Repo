@@ -76,12 +76,12 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 ## 羊毛
 
 - 广汽三菱 gqsl.js
-
 - 滴滴果园 left_ddgy.js
 - 滴滴果园刷水滴 tom_ddgyssd.js
 - 快手普通版 left_ks.js
 - 快手极速版 left_ksjsb.js
-- 腾讯自选股 left_txzzg.js
+- 腾讯自选股v2 left_txzzg.js
+- 腾讯自选股v1 left_txzxgv1.js
 
 ## 依赖
 ### NodeJs
