@@ -42,6 +42,9 @@ let body = {
             return;
     }
 
+    $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
+    $.log(slCookiesArr)
+    
     for (let index = 0; index < slCookiesArr.length; index++) {
         let cookie = slCookiesArr[index]
         body.headers = {
@@ -112,9 +115,7 @@ async function Envs() {
         $.log(`\n【${$.name}】：未填写变量 slCookies`)
         return;
     }
-    
-    $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
-    $.log(slCookiesArr)
+
     return true;
 }
 // ============================================ 重写 ============================================ \\
