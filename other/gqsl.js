@@ -93,14 +93,10 @@ let body = {
                 await $.wait(10 * 1000);
                 await Query_Balance();
 
-                await SendMsg(message);
+                await SendMsg(msg);
             }
         }
     }
-
-
-
-
 })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
@@ -152,7 +148,7 @@ async function SendMsg (message) {
     if (!message)
         return;
 
-    message = `【${$.name}】` + "运行通知\n" + message
+    message = `【${$.name}】` + "运行通知 " + message
 
     if (Notify > 0) {
         if ($.isNode()) {
