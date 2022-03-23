@@ -21,7 +21,7 @@
 const $ = new Env("广汽三菱");
 const Notify = 1; //0为关闭通知，1为打开通知,默认为1
 
-let slCookies =($.isNode() ? process.env.slCookies : $.getdata('slCookies')) || '';
+let slCookies = ($.isNode() ? process.env.slCookies : $.getdata('slCookies')) || '';
 let slCookiesArr = [];
 let msg = '';
 let body = {
@@ -37,72 +37,76 @@ let body = {
 !(async () => {
     if (typeof $request !== "undefined") {
         await GetRewrite()
-    } else { 
+    } else {
         if (!(await Envs()))
             return;
-    }
+        else {
+            $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
+            $.log(slCookiesArr)
 
-    $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
-    $.log(slCookiesArr)
-    
-    for (let index = 0; index < slCookiesArr.length; index++) {
-        let cookie = slCookiesArr[index]
-        body.headers = {
-            'Authorization': `${cookie}`,
-            'Content-Type': 'application/json;charset=utf-8'
+            for (let index = 0; index < slCookiesArr.length; index++) {
+                let cookie = slCookiesArr[index]
+                body.headers = {
+                    'Authorization': `${cookie}`,
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+                await $.wait(1 * 1000);
+                var num = index + 1
+                $.log(`\n========= 开始【第 ${num} 个账号】=========`)
+                msg += `\n【第 ${num} 个账号】`
+                $.log(cookie)
+                //await Update_Info();
+
+                await Query_UserInfo(slCookiesArr[index]);
+                await Query_Balance(true);
+                await $.wait(1 * 1000);
+
+                $.log('开始 【签到】')
+                await Sign_In();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【分享动态】')
+                await Share_4();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【分享资讯】')
+                await Share_5();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【分享活动】')
+                await Share_6();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【发布评论】')
+                await Add_Comment();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【回答问题】')
+                await Add_Answer();
+                await $.wait(2 * 1000);
+
+                $.log('开始 【发布动态】')
+                await Add_Dynamic();
+                await $.wait(2 * 1000);
+                await Remove_Dynamic()
+
+                await $.wait(10 * 1000);
+                await Query_Balance();
+                await SendMsg();
+            }
         }
-        await $.wait(1 * 1000);
-        var num = index + 1
-        $.log(`\n========= 开始【第 ${num} 个账号】=========`)
-        msg += `\n【第 ${num} 个账号】`
-        $.log(cookie)
-        //await Update_Info();
-
-        await Query_UserInfo(slCookiesArr[index]);
-        await Query_Balance(true);
-        await $.wait(1 * 1000);
-
-        $.log('开始 【签到】')
-        await Sign_In();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【分享动态】')
-        await Share_4();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【分享资讯】')
-        await Share_5();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【分享活动】')
-        await Share_6();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【发布评论】')
-        await Add_Comment();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【回答问题】')
-        await Add_Answer();
-        await $.wait(2 * 1000);
-
-        $.log('开始 【发布动态】')
-        await Add_Dynamic();
-        await $.wait(2 * 1000);
-        await Remove_Dynamic()
-
-        await $.wait(10 * 1000);
-        await Query_Balance();
     }
-    
-    await SendMsg();
+
+
+
+
 })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
 
 
 // ============================================变量检查============================================ \\
-async function Envs() {
+async function Envs () {
     if (slCookies) {
         if (slCookies.indexOf("@") != -1) {
             slCookies.split("@").forEach((item) => {
@@ -119,34 +123,34 @@ async function Envs() {
     return true;
 }
 // ============================================ 重写 ============================================ \\
-async function GetRewrite() {
+async function GetRewrite () {
     if ($request.url.indexOf(`sign-count`) > -1 && $request.headers.Authorization) {
         let Authorization = $request.headers.Authorization
         if (Authorization == 'Authorization=anonymous')
             return;
         let cookie = Authorization
-        
-        if(slCookies) {
-            if(slCookies.indexOf(Authorization) == -1) {
+
+        if (slCookies) {
+            if (slCookies.indexOf(Authorization) == -1) {
                 slCookies = slCookies + '@' + cookie
                 let List = slCookies.split('@')
 
                 $.setdata(slCookies, 'slCookies');
-                $.msg($.name+` 获取第${List.length}个ck成功: ${cookie}`)
-            } 
+                $.msg($.name + ` 获取第${List.length}个ck成功: ${cookie}`)
+            }
         } else {
             $.setdata(slCookies, 'slCookies');
-            $.msg($.name+` 获取第1个ck成功: ${cookie}`)
+            $.msg($.name + ` 获取第1个ck成功: ${cookie}`)
         }
-    } 
+    }
 }
 // ============================================发送消息============================================ \\
-async function SendMsg() {
-    if (!msg)  return;
+async function SendMsg () {
+    if (!msg) return;
     msg = `【${$.name}】` + "运行通知\n" + msg
 
     if (Notify > 0) {
-        if($.isNode()){
+        if ($.isNode()) {
             var notify = require('./sendNotify');
             await notify.sendNotify($.name, msg);
         } else {
