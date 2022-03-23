@@ -131,7 +131,7 @@ async function GetRewrite () {
             return;
         let cookie = Authorization
 
-        if (slCookies) {
+        if (slCookies != '') {
             if (slCookies.indexOf(cookie) == -1) {
                 slCookies = slCookies + '@' + cookie
                 let List = slCookies.split('@')
