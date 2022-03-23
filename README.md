@@ -47,7 +47,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 
 ### 加密脚本 安全未知
 
-- 
+- 赚京豆 jd_syj.js
 
 ### 自带助力池的脚本
 - 京喜牧场 jd_jxmc.js
