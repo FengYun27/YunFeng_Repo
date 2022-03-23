@@ -66,7 +66,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 - 头文字J 助力 jd_mpdzcar_help.js
 - 头文字J jd_mpdzcar.js
 - 超级盒子 jd_cjhz.js
-
+- 美丽研究院兑换 jd_beauty_dh.js
 ### 需要添加环境变量及需要手动开启
 - 店铺签到 jd_shop_sign.js
 - 京喜牧场 jd_jxmc.js
