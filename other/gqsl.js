@@ -92,7 +92,8 @@ let body = {
 
                 await $.wait(10 * 1000);
                 await Query_Balance();
-                await SendMsg();
+
+                await SendMsg(message);
             }
         }
     }
@@ -131,33 +132,35 @@ async function GetRewrite () {
         let cookie = Authorization
 
         if (slCookies) {
-            if (slCookies.indexOf(Authorization) == -1) {
+            $.setdata(cookie, 'slCookies');
+            $.msg(`【${$.name}】 获取第1个CK成功: ${cookie}`)
+        } else {
+            if (slCookies.indexOf(cookie) == -1) {
                 slCookies = slCookies + '@' + cookie
                 let List = slCookies.split('@')
 
                 $.setdata(slCookies, 'slCookies');
-                $.msg($.name + ` 获取第${List.length}个ck成功: ${cookie}`)
+                $.msg(`【${$.name}】 获取第${List.length}个CK成功: ${cookie}`)
+            } else {
+                //$.msg($.name + ` 该账号CK已存在`)
             }
-        } else {
-            $.setdata(cookie, 'slCookies');
-            $.msg($.name + ` 获取第1个ck成功: ${cookie}`)
         }
     }
 }
 // ============================================发送消息============================================ \\
-async function SendMsg () {
-    if (!msg) return;
-    msg = `【${$.name}】` + "运行通知\n" + msg
+async function SendMsg (message) {
+    if (!message) return;
+    message = `【${$.name}】` + "运行通知\n" + message
 
     if (Notify > 0) {
         if ($.isNode()) {
             var notify = require('./sendNotify');
-            await notify.sendNotify($.name, msg);
+            await notify.sendNotify($.name, message);
         } else {
-            $.msg(msg);
+            $.msg(message);
         }
     } else {
-        console.log(msg);
+        console.log(message);
     }
 }
 
@@ -442,7 +445,7 @@ function Query_UserInfo (authorization) {
 手机号:${results.data.mobile}`
                 } else {
                     $.log(results.msg)
-                    msg += '账号已过期\n'
+                    SendMsg(`${authorization}该CK已过期`)
                 }
             } catch (e) {
                 $.logErr(e, resp);

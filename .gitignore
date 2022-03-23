@@ -1,3 +1,4 @@
 /other/node_modules
 /other/*.lock
 /other/package.json
+*.test.js
