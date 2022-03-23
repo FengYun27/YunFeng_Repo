@@ -46,8 +46,8 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 - 半点京豆雨 jd_half_redrain.js
 
 ### 加密脚本 安全未知
-
 - 赚京豆 jd_syj.js
+- 京东极速版_金币 jd_speed_signfaker.js
 
 ### 自带助力池的脚本
 - 京喜牧场 jd_jxmc.js
@@ -67,6 +67,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 - 头文字J jd_mpdzcar.js
 - 超级盒子 jd_cjhz.js
 - 美丽研究院兑换 jd_beauty_dh.js
+
 ### 需要添加环境变量及需要手动开启
 - 店铺签到 jd_shop_sign.js
 - 京喜牧场 jd_jxmc.js

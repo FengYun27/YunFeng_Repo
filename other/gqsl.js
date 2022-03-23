@@ -125,6 +125,9 @@ async function Envs () {
 // ============================================ 重写 ============================================ \\
 async function GetRewrite () {
     if ($request.url.indexOf(`sign-count`) > -1 && $request.headers.Authorization) {
+        let cookies = $.getdata('slCookies')
+        $.log(cookies)
+        
         let Authorization = $request.headers.Authorization
         if (Authorization == 'Authorization=anonymous')
             return;
