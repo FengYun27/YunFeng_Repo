@@ -5,14 +5,26 @@
  * 广汽三菱App 
  * 任务：签到、分享动态、回答问题、分享咨询、发布评论、分享活动
  * 没什么卵用 一天才50积分 一个月1500 加上签到累计奖励 随便挂着一、二个月也能兑换点东西 积分到账会有延迟
- * export slCookies='xxxxx@xxxxxx' 多个账号用 @分割 请求头Authorization的值 多账户请多开应用 退出会使Authorization失效
+ * export slCookies='xxxxx@xxxxxx' 多个账号用 @分割 Authorization的值 多账户请多开APP 退出会使Authorization失效
  * 频道：https://t.me/FengYun27
+ * 
+ * V2P，QX重写
+ * 广汽三菱APP-->我的-->右上角签到
+ * [task_local]
+ * #腾讯自选股
+ * 0 0 7 * * ? https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/gqsl.js, tag=广汽三菱, enabled=true
+ * [rewrite_local]
+ * https://mspace.gmmc.com.cn/customer-app/task-mapi/sign-count url script-request-header https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/gqsl.js
+ * [MITM]
+ * hostname = mspace.gmmc.com.cn
  */
 const $ = new Env("广汽三菱");
-const notify = $.isNode() ? require("./sendNotify") : "";
-slCookies = $.isNode() ? process.env.slCookies : "";
-slCookiesArr = [];
-body = {
+const Notify = 1; //0为关闭通知，1为打开通知,默认为1
+
+let slCookies =($.isNode() ? process.env.slCookies : $.getdata('slCookies')) || '';
+let slCookiesArr = [];
+let msg = '';
+let body = {
     url: 'https://mspace.gmmc.com.cn/',
     headers: {
         'Authorization': '',
@@ -20,26 +32,15 @@ body = {
     },
     body: ''
 }
-msg = '';
+
 
 !(async () => {
-    if ($.isNode()) {
-        if (slCookies) {
-            if (slCookies.indexOf("@") != -1) {
-                slCookies.split("@").forEach((item) => {
-                    slCookiesArr.push(item);
-                });
-            } else {
-                slCookiesArr.push(slCookies);
-            }
-        } else {
-            $.log(`\n【${$.name}】：未填写变量 slCookies`)
+    if (typeof $request !== "undefined") {
+        await GetRewrite()
+    } else { 
+        if (!(await Envs()))
             return;
-        }
     }
-    $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
-    $.log(slCookiesArr)
-    await $.wait(1 * 1000);
 
     for (let index = 0; index < slCookiesArr.length; index++) {
         let cookie = slCookiesArr[index]
@@ -50,7 +51,7 @@ msg = '';
         await $.wait(1 * 1000);
         var num = index + 1
         $.log(`\n========= 开始【第 ${num} 个账号】=========`)
-        msg += `【第 ${num} 个账号】\n`
+        msg += `\n【第 ${num} 个账号】`
         $.log(cookie)
         //await Update_Info();
 
@@ -90,10 +91,70 @@ msg = '';
         await $.wait(10 * 1000);
         await Query_Balance();
     }
-    await notify.sendNotify($.name, msg, 'https://t.me/FengYun27');
+    
+    await SendMsg();
 })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
+
+
+// ============================================变量检查============================================ \\
+async function Envs() {
+    if (slCookies) {
+        if (slCookies.indexOf("@") != -1) {
+            slCookies.split("@").forEach((item) => {
+                slCookiesArr.push(item);
+            });
+        } else {
+            slCookiesArr.push(slCookies);
+        }
+    } else {
+        $.log(`\n【${$.name}】：未填写变量 slCookies`)
+        return;
+    }
+    
+    $.log(`=================== 共找到 ${slCookiesArr.length} 个账号 ===================`)
+    $.log(slCookiesArr)
+    return true;
+}
+// ============================================ 重写 ============================================ \\
+async function GetRewrite() {
+    if ($request.url.indexOf(`sign-count`) > -1 && $request.headers.Authorization) {
+        let Authorization = $request.headers.Authorization
+        if (Authorization == 'Authorization=anonymous')
+            return;
+        let cookie = Authorization
+        
+        if(slCookies) {
+            if(slCookies.indexOf(Authorization) == -1) {
+                slCookies = slCookies + '@' + cookie
+                let List = slCookies.split('@')
+
+                $.setdata(slCookies, 'slCookies');
+                $.msg($.name+` 获取第${List.length}个ck成功: ${cookie}`)
+            } 
+        } else {
+            $.setdata(slCookies, 'slCookies');
+            $.msg($.name+` 获取第1个ck成功: ${cookie}`)
+        }
+    } 
+}
+// ============================================发送消息============================================ \\
+async function SendMsg() {
+    if (!msg)  return;
+    msg = `【${$.name}】` + "运行通知\n" + msg
+
+    if (Notify > 0) {
+        if($.isNode()){
+            var notify = require('./sendNotify');
+            await notify.sendNotify($.name, msg);
+        } else {
+            $.msg(msg);
+        }
+    } else {
+        console.log(msg);
+    }
+}
 
 /**
  * 签到
@@ -402,8 +463,8 @@ function Query_Balance (frist) {
                         msg += `\n【任务前总积分】:${results.data}`
                         console.log(`【任务前总积分】:${results.data}`)
                     } else {
-                        msg += `【任务后总积分】:${results.data}\n`
-                        console.log(`【任务后总积分】:${results.data}\n`)
+                        msg += `\n【任务后总积分】:${results.data}\n`
+                        console.log(`\n【任务后总积分】:${results.data}\n`)
                     }
                 } else {
                     $.log(results.msg)
