@@ -21,7 +21,7 @@
 const $ = new Env("广汽三菱");
 const Notify = 1; //0为关闭通知，1为打开通知,默认为1
 
-let slCookies = ($.isNode() ? process.env.slCookies : $.getdata('slCookies')) || null;
+let slCookies = ($.isNode() ? process.env.slCookies : $.getdata('slCookies')) || "";
 let slCookiesArr = [];
 let msg = '';
 let body = {
@@ -125,14 +125,12 @@ async function Envs () {
 // ============================================ 重写 ============================================ \\
 async function GetRewrite () {
     if ($request.url.indexOf(`sign-count`) > -1 && $request.headers.Authorization) {
-        $.log(slCookies)  
-
         let Authorization = $request.headers.Authorization
         if (Authorization == 'Authorization=anonymous')
             return;
         let cookie = Authorization
 
-        if (slCookies) {
+        if (!slCookies) {
             if (slCookies.indexOf(Authorization) == -1) {
                 slCookies = slCookies + '@' + cookie
                 let List = slCookies.split('@')
@@ -141,8 +139,7 @@ async function GetRewrite () {
                 $.msg($.name + ` 获取第${List.length}个ck成功: ${cookie}`)
             }
         } else {
-
-            $.setdata(slCookies, 'slCookies');
+            $.setdata(cookie, 'slCookies');
             $.msg($.name + ` 获取第1个ck成功: ${cookie}`)
         }
     }
