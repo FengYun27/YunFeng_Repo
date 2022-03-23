@@ -132,9 +132,6 @@ async function GetRewrite () {
         let cookie = Authorization
 
         if (slCookies) {
-            $.setdata(cookie, 'slCookies');
-            $.msg(`【${$.name}】 获取第1个CK成功: ${cookie}`)
-        } else {
             if (slCookies.indexOf(cookie) == -1) {
                 slCookies = slCookies + '@' + cookie
                 let List = slCookies.split('@')
@@ -144,12 +141,17 @@ async function GetRewrite () {
             } else {
                 //$.msg($.name + ` 该账号CK已存在`)
             }
+        } else {
+            $.setdata(cookie, 'slCookies');
+            $.msg(`【${$.name}】 获取第1个CK成功: ${cookie}`)
         }
     }
 }
 // ============================================发送消息============================================ \\
 async function SendMsg (message) {
-    if (!message) return;
+    if (!message)
+        return;
+
     message = `【${$.name}】` + "运行通知\n" + message
 
     if (Notify > 0) {
