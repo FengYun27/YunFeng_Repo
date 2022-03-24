@@ -2,3 +2,4 @@
 /other/*.lock
 /other/package.json
 *.test.js
+/jd_enen.js
