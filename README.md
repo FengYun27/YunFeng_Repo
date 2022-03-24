@@ -2,6 +2,7 @@
 ## 收集整理全网可用脚本 进行分类整理 去除内置助力码 对加密脚本进行标注
 
 ### JD仓库 拉库命令
+
 国外
 ```shell
 ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
@@ -17,6 +18,9 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 30 0/15 * * * ? 
 ```
 ### 羊毛仓库 拉库命令
+
+**注意 羊毛仓库和JD仓库不能同时拉**
+
 国内
 ```shell
 ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "other" "expire|jd_" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
