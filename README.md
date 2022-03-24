@@ -19,33 +19,33 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 ```
 ### 羊毛仓库 拉库命令
 
-**注意 羊毛仓库和JD仓库不能同时拉**
+**羊毛仓库属于单独仓库 可以同时和JD仓库一起拉**
 
 国内
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "other" "expire|jd_" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
 国外
 ```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo.git "other" "expire|jd_" "ql|sendNotify|utils|USER_AGENTS|jdcookie|TS_USER_AGENTS|sign_graphics_validate"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
 #### 单拉羊毛脚本
-- [羊毛脚本列表](#羊毛)
+- [羊毛脚本列表](https://github.com/FengYun27/Sheep_Hair#羊毛)
 
 国外
 
 ```shell
-ql raw https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/<脚本名称>.js
+ql raw https://raw.githubusercontent.com/FengYun27/Sheep_Hair/main/<脚本名称>.js
 ```
 
 国内
 
 ```shell
-ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/other/<脚本名称>.js
+ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Sheep_Hair/main/<脚本名称>.js
 ```
 
 # 脚本列表
@@ -90,17 +90,6 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/Yun
 - 京喜牧场 jd_jxmc.js
 - 伊利养牛记 jd_ylyn.js
 - 京东试用 jd_try.js
-
-## 羊毛
-- 广汽三菱 gqsl.js
-- 滴滴果园 left_ddgy.js
-- 滴滴果园刷水滴 tom_ddgyssd.js
-- 快手普通版 left_ks.js
-- 快手极速版 left_ksjsb.js
-- 腾讯自选股v2 left_txzzg.js
-
-### 临时羊毛活动
-- 顺丰——乘风寻宝记 fz_sfxbj.js
 
 ## 依赖
 ### NodeJs
