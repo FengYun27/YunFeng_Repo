@@ -62,8 +62,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 - 半点京豆雨 jd_half_redrain.js
 
 ### 加密脚本 安全未知
-- 赚京豆 jd_syj.js
-- 京东极速版_金币 jd_speed_signfaker.js
+- 京东极速版_金币 jd_speed_signfaker.js (局部加密)
 - 京东到家果园 jd_dj_fruit.js
 
 ### 自带助力池的脚本
