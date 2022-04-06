@@ -184,9 +184,7 @@ async function bean () {
         }
     }
 
-
-
-    await queryexpirejingdou();//过期京豆
+    //await queryexpirejingdou();//过期京豆
     await redPacket();//过期红包
     // console.log(`昨日收入：${$.incomeBean}个京豆 🐶`);
     // console.log(`昨日支出：${$.expenseBean}个京豆 🐶`)
