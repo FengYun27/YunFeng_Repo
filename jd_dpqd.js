@@ -92,7 +92,7 @@ if ($.isNode()) {
 async function GetShareCode () {
     return new Promise(resolve => {
         const options = {
-            url: `https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/shareCode/dpqd.json`
+            url: `https://cdn.jsdelivr.net/gh/FengYun27/YunFeng_Repo@main/shareCode/dpqd.json`
         }
         $.get(options, (err, resp, data) => {
             try {

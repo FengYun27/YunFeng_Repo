@@ -23,13 +23,13 @@ ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git 
 
 国内
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdCookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify|magic"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
 国外
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdCookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify|magic"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
