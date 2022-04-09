@@ -4,7 +4,6 @@
  * 脚本兼容: Node.js
  * X1a0He留
  * 脚本是否耗时只看args_xh.maxLength的大小
- * 上一作者说了每天最多300个商店，总上限为500个，jd_unsubscribe.js我已更新为批量取关版
  * 请提前取关至少250个商店确保京东试用脚本正常运行
  *
  * @Address: https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js
@@ -18,8 +17,6 @@ export JD_TRY_APPLYNUMFILTER="100000" #过滤大于设定值的已申请人数
 export JD_TRY_MINSUPPLYNUM="1" #最小提供数量
 export JD_TRY_SENDNUM="10" #每隔多少账号发送一次通知，不需要可以不用设置
 export JD_TRY_UNIFIED="false" 默认采用不同试用组
-
-
  */
 const $ = new Env('京东试用')
 const URL = 'https://api.m.jd.com/client.action'
@@ -48,8 +45,9 @@ $.innerKeyWords =
         "女用", "神油", "足力健", "老年", "老人",
         "宠物", "饲料", "丝袜", "黑丝", "磨脚",
         "脚皮", "除臭", "性感", "内裤", "跳蛋",
-        "安全套", "龟头", "阴道", "阴部", "手机卡",
-        "流量卡", "和田玉", "钢化膜", "手机壳", "习题", "试卷", "玉石", "硅胶", "壳", "流量卡", "男童", "女童", "婴儿"
+        "安全套", "龟头", "阴道", "阴部", "手机卡", "手机卡", "卡",
+        "流量卡", "和田玉", "钢化膜", "手机壳", "习题", "试卷", "玉石",
+        "硅胶", "壳", "流量卡", "男童", "女童", "婴儿"
     ]
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {

@@ -1,5 +1,5 @@
 # YunFeng_Repo
-## 收集整理全网可用脚本 进行分类整理 去除内置助力码 对加密脚本进行标注
+## 收集整理全网可用脚本 分类整理 去除内置助力码 对加密脚本进行标注
 
 ### JD仓库 拉库命令
 
@@ -50,53 +50,22 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 
 # 脚本列表
 
-## JD脚本
-
-### 可以运行 有用性未知
-- 汪汪乐园养joy jd_joy_park_mod.js
-- 超级直播间红包雨 jd_live_redrain.js
-- 京东摇钱树 jd_moneyTree.js
-- 京东摇钱树助力 jd_moneyTree_heip
-- 牛牛福利 jd_nnfls.js
-- 整点京豆雨 jd_redrain.js
-- 半点京豆雨 jd_half_redrain.js
-
 ### 加密脚本 安全未知
-- 京东极速版_金币 jd_speed_signfaker.js (局部加密)
-- 京东到家果园 jd_dj_fruit.js
+- 京东极速版_金币 `jd_speed_signfaker.js` (局部加密)
 
-### 自带助力池的脚本
-- 京喜牧场 jd_jxmc.js
-
-### 长期活动
-- 东东萌宠互助版 jd_pet_mod.js
-- 东东萌宠任务 jd_pet_rw.js
-- 京东种豆得豆_内部互助 jd_plantBean.js
-- 京东极速版 jd_speed_signfaker.js
-
-### 过期脚本及活动
-- 送豆得豆 jd_sendBeans.js
-- 注销京东会员卡 jd_unbind.js
-- 京喜领88元红包 jd_jxlhb.js
-- 头文字J 游戏 jd_mpdzcar_game.js
-- 头文字J 助力 jd_mpdzcar_help.js
-- 头文字J jd_mpdzcar.js
-- 超级盒子 jd_cjhz.js
-- 美丽研究院兑换 jd_beauty_dh.js
-
-### 需要添加环境变量及需要手动开启
-- 店铺签到 jd_shop_sign.js
-- 京喜牧场 jd_jxmc.js
-- 伊利养牛记 jd_ylyn.js
-- 京东试用 jd_try.js
+### 需要添加环境变量
+- 店铺签到 `jd_dpqd.js` (本地没有时获取云端店铺签到TOKEN 不定时更新)
+- 京东试用 `jd_try.js` (添加 JD_TRY=true 环境变量)
+- 领现金 `jd_cash_Pande.js` (需要添加环境变量gua_cleancart_PandaToken @pang_da_bot获取)
 
 ## 依赖
 ### NodeJs
 - axios
-- ts-md5
 - jsdom
-- png-js
+- ts-md5
 - moment
+- png-js
+- date-fns
 ### Python
 - PyExecJS
 - json5
@@ -104,7 +73,6 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 - pycryptodomex
 
 # Special statement
-
 * Any unlocking and decryption analysis scripts involved in the Script project released by this warehouse are only used for testing, learning and research, and are forbidden to be used for commercial purposes. Their legality, accuracy, completeness and effectiveness cannot be guaranteed. Please make your own judgment based on the situation. .
 
 * All resource files in this project are forbidden to be reproduced or published in any form by any official account or self-media.
