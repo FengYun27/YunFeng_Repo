@@ -1,18 +1,9 @@
 /*
-店铺签到，各类店铺签到，有新的店铺直接添加token即可
-============Quantumultx===============
-[task_local]
-#店铺签到
-15 2,14 * * * https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.js, tag=店铺签到, enabled=true
-===========Loon============
-[Script]
-cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.js,tag=店铺签到
-============Surge=============
-店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.js
-===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
+店铺签到，各类店铺签到，有新的店铺直接添加token即可 多个token请用&隔开 变量名称:DPQDTK
+
+cron "15 2,14 * * *" https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/jd_dpqd.js, tag=店铺签到, enabled=true
 */
-const $ = new Env('店铺签到');
+const $ = new Env('店铺签到_windfgg修改版');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -24,8 +15,8 @@ let activityId = ''
 let vender = ''
 let num = 0
 let shopname = ''
-const token = [
-]
+let token = process.env.DPQDTK ? process.env.DPQDTK : '';
+let tokenArr = []
 
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
@@ -47,6 +38,24 @@ if ($.isNode()) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
         return;
     }
+
+    if (token) {
+        if (token.indexOf("&") != -1) {
+            token.split('&').forEach((item) => {
+                tokenArr.push(item);
+            });
+        } else {
+            tokenArr.push(token);
+        }
+    } else {
+        await GetShareCode();
+        if (tokenArr.length == 0) {
+            $.log(`\n【${$.name}】：未填写变量 DPQQTK`)
+        }
+        return;
+    }
+
+    $.log(`当前有${tokenArr.length}个店铺Token\n${tokenArr}`)
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
@@ -66,7 +75,6 @@ if ($.isNode()) {
             }
             await dpqd()
             await showMsg()
-            await $.wait(1500)
         }
     }
     if ($.isNode() && allMessage) {
@@ -80,51 +88,20 @@ if ($.isNode()) {
         $.done();
     })
 
-//开始店铺签到
-async function dpqd () {
-    for (var j = 0; j < token.length; j++) {
-        num = j + 1
-        if (token[j] == '') { continue }
-        getUA()
-        await getvenderId(token[j])
-        if (vender == '') { continue }
-        await getvenderName(vender)
-        await getActivityInfo(token[j], vender)
-        await signCollectGift(token[j], vender, activityId)
-        await taskUrl(token[j], vender)
-    }
-}
-
-//获取签到店铺token
-function getDPQDTK () {
+//获取云端店铺签到TOKEN
+async function GetShareCode () {
     return new Promise(resolve => {
         const options = {
-            url: ``,
-            headers: {
-                "accept": "*/*",
-                "accept-encoding": "gzip, deflate, br",
-                "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-                "cookie": cookie,
-                "referer": 'https://h5.m.jd.com/',
-                "User-Agent": $.UA
-                // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
-            }
+            url: `https://raw.githubusercontent.com/FengYun27/YunFeng_Repo/main/shareCode/dpqd.json`
         }
         $.get(options, (err, resp, data) => {
             try {
                 if (err) {
-                    console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
+                    console.log(`\n${$.name}: API查询云端店铺签到TOKEN失败 ‼️‼️`)
                     $.logErr(err);
                 } else {
-                    //console.log(data)
-                    data = JSON.parse(/{(.*)}/g.exec(data)[0])
-                    if (data.code == 402) {
-                        vender = ''
-                        console.log(`第` + num + `个店铺签到活动已失效`)
-                        message += `第` + num + `个店铺签到活动已失效\n`
-                    } else {
-                        vender = data.data.venderId
-                    }
+                    tokenArr = JSON.parse(data)['DPQDTK'];
+                    $.log(`获取到云端店铺签到TOKEN：${tokenArr.length}个`)
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -133,6 +110,20 @@ function getDPQDTK () {
             }
         })
     })
+}
+
+//开始店铺签到
+async function dpqd () {
+    for (var j = 0; j < tokenArr.length; j++) {
+        if (tokenArr[j] == '') { continue }
+        await getvenderId(tokenArr[j])
+        if (vender == '') { continue }
+        await getvenderName(vender)
+        await getActivityInfo(tokenArr[j], vender)
+        await signCollectGift(tokenArr[j], vender, activityId)
+
+        await taskUrl(tokenArr[j], vender)
+    }
 }
 
 //获取店铺ID
@@ -146,8 +137,7 @@ function getvenderId (token) {
                 "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "cookie": cookie,
                 "referer": 'https://h5.m.jd.com/',
-                "User-Agent": $.UA
-                // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+                "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
             }
         }
         $.get(options, (err, resp, data) => {
@@ -160,9 +150,10 @@ function getvenderId (token) {
                     data = JSON.parse(/{(.*)}/g.exec(data)[0])
                     if (data.code == 402) {
                         vender = ''
-                        console.log(`第` + num + `个店铺签到活动已失效`)
-                        message += `第` + num + `个店铺签到活动已失效\n`
+                        console.log(`第` + num + `个店铺签到活动已失效 ${token}`)
+                        message += `第` + num + `个店铺签到活动已失效 ${token}\n`
                     } else {
+                        console.log(`店铺ID：${data.data.venderId}`)
                         vender = data.data.venderId
                     }
                 }
@@ -179,14 +170,13 @@ function getvenderId (token) {
 function getvenderName (venderId) {
     return new Promise(resolve => {
         const options = {
-            url: `https://api.m.jd.com/?functionId=lite_getShopHomeBaseInfo&body={"venderId":"${venderId}","source":"appshop"}&t=1646398923902&appid=jdlite-shop-app&client=H5`,
+            url: `https://wq.jd.com/mshop/QueryShopMemberInfoJson?venderId=${venderId}`,
             headers: {
                 "accept": "*/*",
                 "accept-encoding": "gzip, deflate, br",
                 "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "cookie": cookie,
-                "User-Agent": $.UA
-                // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+                "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
             }
         }
         $.get(options, (err, resp, data) => {
@@ -195,11 +185,10 @@ function getvenderName (venderId) {
                     console.log(`\n${$.name}: API查询请求失败 ‼️‼️`)
                     $.logErr(err);
                 } else {
-                    console.log(data)
                     data = JSON.parse(data)
-                    shopName = data.shopName
-                    console.log(`【` + shopName + `】`)
-                    message += `【` + shopName + `】`
+                    shopname = data.shopName
+                    console.log(`名称：【` + shopname + `】`)
+                    message += `名称：【` + shopname + `】`
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -222,8 +211,7 @@ function getActivityInfo (token, venderId) {
                 "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "cookie": cookie,
                 "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-                "User-Agent": $.UA
-                // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+                "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
             }
         }
         $.get(options, (err, resp, data) => {
@@ -243,8 +231,9 @@ function getActivityInfo (token, venderId) {
                         const discount = data.data.continuePrizeRuleList[i].prizeList[0].discount
                         mes += "签到" + level + "天,获得" + discount + '豆'
                     }
-                    // console.log(message+mes+'\n')
-                    // message += mes+'\n'
+
+                    console.log(message + mes + '\n')
+                    message += mes + '\n'
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -266,8 +255,7 @@ function signCollectGift (token, venderId, activitytemp) {
                 "accept-language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
                 "cookie": cookie,
                 "referer": `https://h5.m.jd.com/babelDiy/Zeus/2PAAf74aG3D61qvfKUM5dxUssJQ9/index.html?token=${token}&sceneval=2&jxsid=16105853541009626903&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1001280291_&utm_term=fa3f8f38c56f44e2b4bfc2f37bce9713`,
-                "User-Agent": $.UA
-                // "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+                "User-Agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
             }
         }
         $.get(options, (err, resp, data) => {
@@ -299,8 +287,7 @@ function taskUrl (token, venderId) {
                 "accept-language": "zh-CN,zh;q=0.9",
                 "cookie": cookie,
                 "referer": `https://h5.m.jd.com/`,
-                "User-Agent": $.UA
-                // "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
+                "user-agent": `Mozilla/5.0 (Linux; U; Android 10; zh-cn; MI 8 Build/QKQ1.190828.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.147 Mobile Safari/537.36 XiaoMi/MiuiBrowser/13.5.40`
             }
         }
         $.get(options, (err, resp, data) => {
@@ -311,7 +298,7 @@ function taskUrl (token, venderId) {
                 } else {
                     //console.log(data)
                     data = JSON.parse(/{(.*)}/g.exec(data)[0])
-                    console.log(`已签到：` + data.data.days + `天`)
+                    console.log(`已签到：` + data.data.days + `天\n`)
                     message += `已签到：` + data.data.days + `天\n`
                 }
             } catch (e) {
@@ -385,18 +372,6 @@ function jsonParse (str) {
             return [];
         }
     }
-}
-
-function randomString (e) {
-    e = e || 32;
-    let t = "abcdef0123456789", a = t.length, n = "";
-    for (i = 0; i < e; i++)
-        n += t.charAt(Math.floor(Math.random() * a));
-    return n
-}
-
-function getUA () {
-    $.UA = `jdapp;iPhone;10.2.2;13.1.2;${randomString(40)};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/2308460611;appBuild/167863;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
 }
 
 // prettier-ignore
