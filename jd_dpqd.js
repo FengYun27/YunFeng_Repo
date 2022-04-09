@@ -51,8 +51,8 @@ if ($.isNode()) {
         await GetShareCode();
         if (tokenArr.length == 0) {
             $.log(`\n【${$.name}】：未填写变量 DPQQTK`)
+            return;
         }
-        return;
     }
 
     $.log(`当前有${tokenArr.length}个店铺Token\n${tokenArr}`)
