@@ -4,7 +4,7 @@
  * by:passerby-b
  */
 const $ = new API("jddj_plantBeans");
-let ckPath = './jdcookie.js';//ck路径,环境变量:JDDJ_CKPATH
+let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
 
 let cookies = [];
 let thiscookie = '', deviceid = '';

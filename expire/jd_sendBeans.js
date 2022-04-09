@@ -17,7 +17,7 @@ cron "45 1,12 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync
  */
 const $ = new Env('送豆得豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], isLoginInfo = {};
 if ($.isNode()) {

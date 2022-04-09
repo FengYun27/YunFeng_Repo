@@ -5,7 +5,7 @@
 const $ = new Env('美丽研究院--兑换');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdcookie.js处填写京东ck;
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const WebSocket = require('ws');
 $.accountCheck = true;
 $.init = false;

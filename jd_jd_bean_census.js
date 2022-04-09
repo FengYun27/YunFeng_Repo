@@ -5,7 +5,7 @@
 const $ = new Env('京豆详情统计');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdcookie.js处填写京东ck;
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let allMessage = '';
 let myMap = new Map();
 let allBean = 0;

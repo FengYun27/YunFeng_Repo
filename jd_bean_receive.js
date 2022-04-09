@@ -6,7 +6,7 @@
 const $ = new Env('领京豆额外奖励');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdcookie.js处填写京东ck;
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', uuid = '', message;

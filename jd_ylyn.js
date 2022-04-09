@@ -11,7 +11,7 @@ cron 38 5,18 * * * jd_ylyn.js, tag=伊利养牛记, img-url=https://raw.githubus
 */
 const $ = new Env('伊利养牛记');
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
 let merge = {}

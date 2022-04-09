@@ -7,7 +7,7 @@
  * 活动入口：京东APP首页搜索 "玩一玩"即可
  */
 const $ = new Env("东东健康社区内部互助");
-const jdCookieNode = $.isNode() ? require("./jdcookie.js") : "";
+const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 const notify = $.isNode() ? require('./sendNotify') : "";
 let cookiesArr = [], cookie = "", allMessage = "", message;
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : '';

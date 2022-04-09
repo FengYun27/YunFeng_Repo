@@ -3,7 +3,7 @@
  * cron "10 6,22 * * *" clean_car.js, tag:快速清空购物车
  */
 const $ = new Env('快速清空购物车');
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
 let lz_cookie = {}

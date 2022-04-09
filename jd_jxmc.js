@@ -17,7 +17,7 @@
 });
 const $ = new Env('京喜牧场');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.inviteCodeList = [];
 let cookiesArr = [];
 let UA, token, UAInfo = {}

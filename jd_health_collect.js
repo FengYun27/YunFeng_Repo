@@ -8,7 +8,7 @@
  * author: 疯疯
  */
 const $ = new Env("东东健康社区收集能量收集");
-const jdCookieNode = $.isNode() ? require("./jdcookie.js") : "";
+const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 let cookiesArr = [],
     cookie = "",
     message;

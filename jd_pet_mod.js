@@ -15,7 +15,7 @@ let jdNotify = false; //是否关闭通知，false打开通知推送，true关�
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let goodsUrl = '', taskInfoKey = [];
 let notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let newShareCodes = [];
 let NoNeedCodes = [];
 if ($.isNode()) {

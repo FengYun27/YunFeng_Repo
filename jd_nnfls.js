@@ -10,7 +10,7 @@
  */
 const $ = new Env('牛牛福利');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
 let cookiesArr = [];
 let shareCodes = [];

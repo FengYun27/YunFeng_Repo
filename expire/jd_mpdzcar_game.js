@@ -10,7 +10,7 @@ TG https://t.me/duckjobs
 10 6,10,12 * * * jd_mpdzcar.js
 */
 const $ = new Env('');
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
 if ($.isNode()) {

@@ -17,7 +17,7 @@ cron "0 0-18/6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/syn
 const $ = new Env('京东手机狂欢城');
 const count = 1; //要助力的前几个账号
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {

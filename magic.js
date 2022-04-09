@@ -4,9 +4,8 @@ const axios = require('axios');
 const fs = require("fs");
 const { format } = require("date-fns");
 const notify = require('./sendNotify');
-const jdCookieNode = require('./jdcookie.js');
+const jdCookieNode = require('./jdCookie.js');
 const CryptoJS = require("crypto-js");
-const got = require("got");
 let cookies = [];
 let testMode = process.env.TEST_MODE?.includes('on') ? true
     : __dirname.includes("magic")

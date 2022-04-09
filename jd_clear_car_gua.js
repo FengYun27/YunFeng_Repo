@@ -43,7 +43,7 @@ let cleancartProducts = ''
 let isSignError = false;
 
 const $ = new Env('清空购物车');
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],

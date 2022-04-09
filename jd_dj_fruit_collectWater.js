@@ -4,7 +4,7 @@
  * by:passerby-b
  */
 const $ = new API("jddj_fruit_collectWater");
-let ckPath = './jdcookie.js';//ck路径,环境变量:JDDJ_CKPATH
+let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
 let cookies = [];
 let thiscookie = '', deviceid = '';
 let lat = '30.' + Math.round(Math.random() * (99999 - 10000) + 10000);

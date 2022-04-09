@@ -5,7 +5,7 @@
  */
 
 const $ = new API("jddj_getPoints");
-let ckPath = './jdcookie.js';//ck路径,环境变量:JDDJ_CKPATH
+let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
 let cookies = [];
 let thiscookie = '', deviceid = '', nickname = '';
 let lat = '30.' + Math.round(Math.random() * (99999 - 10000) + 10000);

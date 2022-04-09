@@ -6,7 +6,7 @@
  * by：duck
  */
 const $ = new Env("颜究种植园");
-const jdcookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdcookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = '', message = '';
 let waternum = 0;

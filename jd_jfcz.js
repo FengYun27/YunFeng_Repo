@@ -8,7 +8,7 @@
  */
 const $ = new Env('见缝插针');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require('./jdcookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 let linkId = 'DYWV0DabsUxdj2FEBIkurg';

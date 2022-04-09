@@ -20,7 +20,7 @@ cron "4 10 * * *" script-path=jd_market_lottery.js,tag=幸运大转盘
 */
 
 const $ = new Env("幸运大转盘");
-const jdCookieNode = $.isNode() ? require("./jdcookie.js") : "";
+const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 let cookiesArr = [],
     cookie = "",
     allMsg = '';
