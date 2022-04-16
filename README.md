@@ -5,7 +5,7 @@
 
 国外
 ```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdCookie|TS_USER_AGENTS|sign_graphics_validate"
+ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|m_|js_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdCookie|TS_USER_AGENTS|sign_graphics_validate"
 
 30 0/15 * * * ? 
 ```
@@ -13,7 +13,7 @@ ql repo https://github.com/FengYun27/YunFeng_Repo "jd_" "expire" "ql|sendNotify|
 国内
 
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "jd_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdCookie|TS_USER_AGENTS|sign_graphics_validate"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/YunFeng_Repo.git "jd_|jx_|m_|js_" "expire" "ql|sendNotify|utils|USER_AGENTS|jdCookie|TS_USER_AGENTS|sign_graphics_validate"
 
 30 0/15 * * * ? 
 ```
