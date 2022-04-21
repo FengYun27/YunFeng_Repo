@@ -47,6 +47,7 @@ if ($.isNode()) {
         } else {
             tokenArr.push(token);
         }
+        await GetShareCode();
     } else {
         await GetShareCode();
         if (tokenArr.length == 0) {
