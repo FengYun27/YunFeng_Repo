@@ -119,7 +119,10 @@ async function dpqd() {
         num = j
         if (tokenArr[j] == '') { continue }
         await getvenderId(tokenArr[j])
-        if (vender == '') { continue }
+        if (vender == '') {
+            console.log(`第` + num + `个店铺签到活动已失效 ${token} 跳过`)
+            continue
+        }
         await getvenderName(vender)
         await getActivityInfo(tokenArr[j], vender)
         await signCollectGift(tokenArr[j], vender, activityId)
@@ -302,6 +305,7 @@ function taskUrl(token, venderId) {
                     data = JSON.parse(/{(.*)}/g.exec(data)[0])
                     console.log(`已签到：` + data.data.days + `天\n`)
                     message += `已签到：` + data.data.days + `天\n`
+                    console.log(data)
                 }
             } catch (e) {
                 $.logErr(e, resp);
