@@ -238,7 +238,7 @@ function getActivityInfo(token, venderId) {
                     }
                     console.log(data)
                     console.log(message + mes + '\n')
-                    message += mes + '\n'
+                    message += mes
                 }
             } catch (e) {
                 $.logErr(e, resp);
