@@ -5,8 +5,18 @@ Channel  https://t.me/wind_fgg
 Group  https://t.me/windfgg_chart
 
 Bot https://t.me/FengYun7_bot
-### 拉库命令
+### 环境变量
+``` shell
+## windfgg 接口
+export WindfggToken=''
+export WindfggHost='api.windfgg.cf'
 
+## 锦鲤
+export Proxy_Url=''
+export WindfggJinliToken=''
+export JinLinHost='20.24.232.57'
+```
+### 拉库命令
 国外
 ```shell
 ql repo https://github.com/FengYun27/YunFeng_Repo.git "jd_|jx_|jr_|jds_|jdCookie|ql|USER" "" "utils|sendNotify|USER|ql|jdCookie"
