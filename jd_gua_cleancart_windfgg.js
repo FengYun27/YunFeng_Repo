@@ -280,11 +280,6 @@ function jdSign(fn, body) {
     }
     if (!flag)
         return sign
-        if (!jdSignUrl.match(/^https?:\/\//)) {
-            console.log('请填写算法url')
-            $.out = true
-                return ''
-        }
     return new Promise((resolve) => {
         let url = {
             url: `http://${jdWindfggHost}/jd/sign`,

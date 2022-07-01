@@ -1,5 +1,5 @@
 """
-new Env('青龙全自动更新cookie');
+new Env('更新wsck_windfgg');
 接口:Windfgg
 """
 
