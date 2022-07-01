@@ -1,4 +1,10 @@
 # YunFeng_Repo
+## TG
+Channel  https://t.me/wind_fgg
+
+Group  https://t.me/windfgg_chart
+
+Bot https://t.me/FengYun7_bot
 ### 拉库命令
 
 国外
@@ -10,22 +16,6 @@ ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|s
 
 国内
 
-```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|sendNotify|USER|ql"
-
-30 0/15 * * * ? 
-```
-### 羊毛仓库 拉库命令
-
-**羊毛仓库属于单独仓库 可以同时和JD仓库一起拉**
-
-国内
-```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|sendNotify|USER|ql"
-
-30 0/15 * * * ? 
-```
-国外
 ```shell
 ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|sendNotify|USER|ql"
 
