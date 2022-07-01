@@ -9,7 +9,7 @@ Bot https://t.me/FengYun7_bot
 
 国外
 ```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|sendNotify|USER|ql"
+ql repo https://github.com/FengYun27/YunFeng_Repo.git "jd_|jx_|jr_|jds_|jdCookie|ql|USER" "" "utils|sendNotify|USER|ql|jdCookie"
 
 30 0/15 * * * ? 
 ```
@@ -17,7 +17,7 @@ ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|s
 国内
 
 ```shell
-ql repo https://github.com/FengYun27/YunFeng_Repo "jd_|jx_|jr_|jds_" "" "utils|sendNotify|USER|ql"
+ql repo https://hub.fastgit.xyz/FengYun27/YunFeng_Repo.git "jd_|jx_|jr_|jds_|jdCookie|ql|USER" "" "utils|sendNotify|USER|ql|jdCookie"
 
 30 0/15 * * * ? 
 ```
