@@ -48,6 +48,8 @@ def get_log(functionId,pin):
                 logger.info("获取log失败： ", res["msg"])
                 continue
             resp = res['data']
+            times=res['msg']
+            logger.info(f'log剩余次数:{times}次')
             return resp["log"], resp["random"], resp["ck"], res['msg']
         except Exception as e:
             logger.info(f"获取log出错 等待十秒 {res}")
@@ -257,11 +259,10 @@ def main():
             continue
         status = jinli_h5assist(cookie, inviteCode)
         if status:
-            logger.info('*************助力满了 手动开包 自动火爆*************\n')
-            break
-            '''
-            logger.info('*******************开红包*******************\n')
+            logger.info('*************助力满了 开红包*************\n')
+            #logger.info('*******************开红包*******************\n')
             h5receiveRedpacketAll(cookie_list_pin[index])
+            time.sleep(3)
             index += 1
             if index >= len(cookie_list_pin):
                 break
@@ -270,11 +271,10 @@ def main():
                 inviteCode = h5activityIndex(cookie_list_pin[index])
                 if inviteCode:
                     break
-            '''
     else:
-        logger.info('*************助力没满 手动开包 自动火爆*************\n')
-        #logger.info('*******************开红包*******************\n')
-        #h5receiveRedpacketAll(cookie_list_pin[index])
+        logger.info('*******************开红包*******************\n')
+        h5receiveRedpacketAll(cookie_list_pin[index])
+        time.sleep(3)
         logger.info('没有需要助力的锦鲤红包助力码\n')
 
     logCount = (startLog+1)-endLog
